@@ -25,10 +25,14 @@ export default defineTool({
     if (!name) {
       return { content: [{ type: "text", text: "O nome do atleta é obrigatório." }], isError: true };
     }
+    const row: Record<string, unknown> = { full_name: name, user_id: ctx.getUserId()! };
+    for (const [key, value] of Object.entries(input)) {
+      if (key !== "full_name" && value !== undefined) row[key] = value;
+    }
     const supabase = supabaseForUser(ctx);
     const { data, error } = await supabase
       .from("athletes")
-      .insert({ ...input, full_name: name, user_id: ctx.getUserId()! })
+      .insert(row as never)
       .select()
       .single();
     if (error) return { content: [{ type: "text", text: error.message }], isError: true };

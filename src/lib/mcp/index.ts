@@ -1,4 +1,5 @@
 import { auth, defineMcp } from "@lovable.dev/mcp-js";
+import type { AnyToolDefinition } from "@lovable.dev/mcp-js";
 import listAthletes from "./tools/list-athletes";
 import createAthlete from "./tools/create-athlete";
 import updateAthlete from "./tools/update-athlete";
@@ -18,5 +19,5 @@ export default defineMcp({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",
   }),
-  tools: [listAthletes, createAthlete, updateAthlete, deleteAthlete],
+  tools: [listAthletes, createAthlete, updateAthlete, deleteAthlete] as unknown as AnyToolDefinition[],
 });

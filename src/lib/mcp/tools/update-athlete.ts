@@ -32,7 +32,7 @@ export default defineTool({
     const supabase = supabaseForUser(ctx);
     const { data, error } = await supabase
       .from("athletes")
-      .update(patch)
+      .update(patch as never)
       .eq("id", id)
       .select()
       .maybeSingle();
