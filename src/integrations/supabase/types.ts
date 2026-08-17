@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      athletes: {
+        Row: {
+          birth_date: string | null
+          category: string | null
+          created_at: string
+          dominant_foot: string | null
+          full_name: string
+          height_cm: number | null
+          id: string
+          notes: string | null
+          position: string | null
+          updated_at: string
+          user_id: string
+          weight_kg: number | null
+        }
+        Insert: {
+          birth_date?: string | null
+          category?: string | null
+          created_at?: string
+          dominant_foot?: string | null
+          full_name: string
+          height_cm?: number | null
+          id?: string
+          notes?: string | null
+          position?: string | null
+          updated_at?: string
+          user_id?: string
+          weight_kg?: number | null
+        }
+        Update: {
+          birth_date?: string | null
+          category?: string | null
+          created_at?: string
+          dominant_foot?: string | null
+          full_name?: string
+          height_cm?: number | null
+          id?: string
+          notes?: string | null
+          position?: string | null
+          updated_at?: string
+          user_id?: string
+          weight_kg?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
