@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://igmglreaoubnfjcmpghm.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "talento-jovem",
+      "version": "0.1.0",
+      "title": "Talento Jovem"
+    },
+    "tools": [
+      {
+        "name": "list_athletes",
+        "title": "Listar atletas",
+        "description": "Lista os atletas de categoria de base cadastrados pelo usuário autenticado, opcionalmente filtrando por categoria ou por parte do nome.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Filtra por categoria, por exemplo 'sub-15'.",
+              "type": "string"
+            },
+            "search": {
+              "description": "Filtra por parte do nome do atleta.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_athlete",
+        "title": "Cadastrar atleta",
+        "description": "Cadastra um novo atleta de categoria de base para o usuário autenticado.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "full_name": {
+              "type": "string",
+              "description": "Nome completo do atleta."
+            },
+            "birth_date": {
+              "description": "Data de nascimento no formato AAAA-MM-DD.",
+              "type": "string"
+            },
+            "category": {
+              "description": "Categoria, por exemplo 'sub-13'.",
+              "type": "string"
+            },
+            "position": {
+              "description": "Posição em campo.",
+              "type": "string"
+            },
+            "dominant_foot": {
+              "description": "Pé dominante: destro, canhoto ou ambidestro.",
+              "type": "string"
+            },
+            "height_cm": {
+              "description": "Altura em centímetros.",
+              "type": "number"
+            },
+            "weight_kg": {
+              "description": "Peso em quilos.",
+              "type": "number"
+            },
+            "notes": {
+              "description": "Observações técnicas sobre o atleta.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "full_name"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_athlete",
+        "title": "Atualizar atleta",
+        "description": "Atualiza os dados de um atleta já cadastrado. Somente os campos enviados são alterados.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Identificador do atleta (obtido em list_athletes)."
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "birth_date": {
+              "description": "Data de nascimento no formato AAAA-MM-DD.",
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "position": {
+              "type": "string"
+            },
+            "dominant_foot": {
+              "type": "string"
+            },
+            "height_cm": {
+              "type": "number"
+            },
+            "weight_kg": {
+              "type": "number"
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "delete_athlete",
+        "title": "Remover atleta",
+        "description": "Remove definitivamente um atleta cadastrado pelo usuário autenticado.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Identificador do atleta (obtido em list_athletes)."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
